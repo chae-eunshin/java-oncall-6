@@ -2,7 +2,7 @@ package oncall.view;
 
 import camp.nextstep.edu.missionutils.Console;
 
-public class inputView {
+public class InputView {
 
     public static String readInput(String requestMessage) {
         System.out.println(requestMessage);
