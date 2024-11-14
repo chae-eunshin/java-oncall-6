@@ -1,28 +1,30 @@
 package oncall.Controller;
 
+import oncall.model.OncallSchedule;
 import oncall.utills.ValidationChecker;
 import oncall.view.InputView;
 
 public class OncallController {
-//    private final InputView inputView;
 
     public OncallController(){
-//        inputView = new InputView();
+
     }
 
     public void run(){
-
-        String monthDayInput = InputView.readInput("비상 근무를 배정할 월과 시작 요일을 입력하세요>");
-        ValidationChecker.isDividedByComma(monthDayInput);
+        String[] monthDayInputs= hadleMonthDay();
+        OncallSchedule oncallSchedule = new OncallSchedule(Integer.parseInt(monthDayInputs[0]),monthDayInputs[1]);
 
     }
 
-    private void hadleMonthDay(){
-        boolean isDone = false;
-        while(!isDone){
+    private String[] hadleMonthDay(){
+        while(true){
             try {
                 String monthDayInput = InputView.readInput("비상 근무를 배정할 월과 시작 요일을 입력하세요>");
-                isDone= ValidationChecker.isDividedByComma(monthDayInput);
+                ValidationChecker.isDividedByComma(monthDayInput);
+                String [] inputList = monthDayInput.split(",");
+                ValidationChecker.isMonth(Integer.parseInt(inputList[0]));
+                ValidationChecker.isDay(inputList[1]);
+                return inputList;
             }catch(IllegalArgumentException e){
                 System.out.println(e.getMessage());
             }
