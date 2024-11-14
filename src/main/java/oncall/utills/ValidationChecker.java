@@ -1,5 +1,9 @@
 package oncall.utills;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 public class ValidationChecker {
 
     public static void isDividedByComma(String input) {
@@ -17,6 +21,16 @@ public class ValidationChecker {
     public static void isDay(String day) {
         if(!day.matches("[월화수목금토일]")){
             throw new IllegalArgumentException("[ERROR] 요일은 월,화,수,목,금,토,일 안에서 입력해주세요");
+        }
+    }
+
+    public static void isOnCallStaff(String userInput) {
+        String[] inputArray = userInput.split(",");
+
+        Set<String> uniqueItems = new HashSet<>(Arrays.asList(inputArray));
+
+        if(uniqueItems.size() != inputArray.length){
+            throw new IllegalArgumentException("[ERROR] 유효하지 않은 입력 값입니다. 다시 입력해 주세요.");
         }
     }
 }
