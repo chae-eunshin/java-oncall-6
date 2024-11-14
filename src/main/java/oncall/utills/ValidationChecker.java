@@ -24,12 +24,20 @@ public class ValidationChecker {
         }
     }
 
-    public static void isOnCallStaff(String userInput) {
+    public static void isDuplication(String userInput) {
         String[] inputArray = userInput.split(",");
 
         Set<String> uniqueItems = new HashSet<>(Arrays.asList(inputArray));
 
-        if(uniqueItems.size() != inputArray.length){
+        if(uniqueItems.size() != inputArray.length){ //한 순번에 중복되어 편성되면 안됨
+            throw new IllegalArgumentException("[ERROR] 유효하지 않은 입력 값입니다. 다시 입력해 주세요.");
+        }
+    }
+
+    public static void isOnCallStaff(String weeklyStaff,String holidayStaff) {
+        Set<String> weekly = new HashSet<>(Arrays.asList(weeklyStaff.split(",")));
+        Set<String> holiday = new HashSet<>(Arrays.asList(holidayStaff.split(",")));
+        if(!weekly.equals(holiday)){ //온콜 스태프가 정해져있으니 요소가 일치해야함
             throw new IllegalArgumentException("[ERROR] 유효하지 않은 입력 값입니다. 다시 입력해 주세요.");
         }
     }

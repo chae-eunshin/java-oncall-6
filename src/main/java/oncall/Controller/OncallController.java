@@ -36,9 +36,10 @@ public class OncallController {
         while(true){
             try {
                 String weekdayStaffInput = InputView.readInput("평일 비상 근무 순번대로 사원 닉네임을 입력하세요>");
-                ValidationChecker.isOnCallStaff(weekdayStaffInput);
+                ValidationChecker.isDuplication(weekdayStaffInput);
                 String holidayStaffInput = InputView.readInput("휴일 비상 근무 순번대로 사원 닉네임을 입력하세요>");
-                ValidationChecker.isOnCallStaff(holidayStaffInput);
+                ValidationChecker.isDuplication(holidayStaffInput);
+                ValidationChecker.isOnCallStaff(weekdayStaffInput,holidayStaffInput);
                 return new String[]{weekdayStaffInput, holidayStaffInput};
             }catch(IllegalArgumentException e){
                 System.out.println(e.getMessage());
