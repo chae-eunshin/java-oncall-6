@@ -20,4 +20,11 @@ public class OncallStaffManager {
     public List<String> getHolidayStaff() {
         return holidayStaff;
     }
+
+    public String getTodayOncallStaff( String day,int order) {
+        if (day.contains("휴일") || day.equals("토") || day.equals("일")) {
+            return holidayStaff.get(order % holidayStaff.size()+1);//그 다음 순서를 불러오기
+        }
+        return weekdayStaff.get(order % weekdayStaff.size()+1);
+    }
 }

@@ -24,10 +24,5 @@ public class OncallSchedule {
         return newDate.lengthOfMonth();
     }
 
-    public String getTodayOncallStaff(OncallStaffManager oncallStaffManager, String day,int order) {
-        if (day.equals("휴일") || day.equals("토") || day.equals("일")) {
-            return oncallStaffManager.getHolidayStaff().get(order+1);//그 다음 순서를 불러오기
-        }
-        return oncallStaffManager.getWeekdayStaff().get(order+1);
-    }
+
 }
