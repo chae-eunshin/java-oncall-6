@@ -4,6 +4,7 @@ import oncall.model.OncallSchedule;
 import oncall.model.OncallStaffManager;
 import oncall.utills.ValidationChecker;
 import oncall.view.InputView;
+import oncall.view.OutputView;
 
 public class OncallController {
 
@@ -14,7 +15,9 @@ public class OncallController {
     public void run(){
         String[] monthDayInputs= hadleMonthDay();
         OncallSchedule oncallSchedule = new OncallSchedule(Integer.parseInt(monthDayInputs[0]),monthDayInputs[1]);
-        OncallStaffManager oncallStaffManager = new OncallStaffManager(hadleOncallWeekDayStaff()[0],hadleOncallWeekDayStaff()[1] );
+        String [] oncallStaffs = hadleOncallWeekDayStaff();
+        OncallStaffManager oncallStaffManager = new OncallStaffManager(oncallStaffs[0],oncallStaffs[1] );
+        OutputView.printOncallSchedule(oncallSchedule, oncallStaffManager);
     }
 
     private String[] hadleMonthDay(){
@@ -40,7 +43,7 @@ public class OncallController {
                 String holidayStaffInput = InputView.readInput("휴일 비상 근무 순번대로 사원 닉네임을 입력하세요>");
                 ValidationChecker.isDuplication(holidayStaffInput);
                 ValidationChecker.isOnCallStaff(weekdayStaffInput,holidayStaffInput);
-                return new String[]{weekdayStaffInput, holidayStaffInput};
+                return new String[] {weekdayStaffInput,holidayStaffInput};
             }catch(IllegalArgumentException e){
                 System.out.println(e.getMessage());
             }
